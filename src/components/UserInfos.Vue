@@ -1,0 +1,48 @@
+<template>
+    <div>   
+        <Menu theme="light" :active-name="itemname" @on-select="select" id="userInfos">       
+            <Menu-item name="/userinfos/pageinfo">
+                <Icon type="document-text"></Icon>
+                页面设置
+            </Menu-item>
+            <Menu-item name="/userinfos/userinfo">
+                <Icon type="chatbubbles"></Icon>
+                信息设置
+            </Menu-item>
+        </Menu>
+    <router-view id="info"></router-view>
+    </div>
+</template>
+<script>
+    export default {
+        name: 'userinfos',
+        data(){
+            return {
+                itemname: '/userinfos/pageinfo'
+            }
+        },
+        methods: {
+            select(val){
+                console.log(val)
+               
+                this.$router.push(val);
+                
+            }
+        }
+    }
+    
+</script>
+<style scoped>
+    #userInfos{
+        float: left;
+        margin:20px;
+        margin-left:100px;
+    }
+    #info{
+        float: left;
+        margin: 10px;
+    }
+</style>
+
+
+
