@@ -23,11 +23,21 @@
         },
         methods: {
             select(val){
-                console.log(val)
+                //console.log(val)
                
                 this.$router.push(val);
                 
             }
+        },
+        mounted(){
+            this.$http.post("/user/getUserInfo.go")
+            .then(response=>{
+                this.$store.state.userInfo = response.data;
+            })
+            .catch(err=>{
+                this.$Message.error('个人信息获取失败')
+            })
+            //this.$router.push(itemname);
         }
     }
     

@@ -20,3 +20,19 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+
+router.beforeEach((to,from,next)=>{
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+    //console.log("拦截"+store.state.loginsuccess)
+    if (!store.state.loginsuccess) {
+      next({
+        path: '/',
+        query: { redirect: to.fullPath }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next() // 确保一定要调用 next()
+  }
+})

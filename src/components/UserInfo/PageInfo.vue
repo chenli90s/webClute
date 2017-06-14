@@ -3,27 +3,33 @@
 
 
         <Card id="card">
-          <div id="headimg">
-            <img :src="item.url">
-            <div class="demo-upload-list-cover">
-                <Icon type="ios-eye-outline" @click.native="handleView(item.name)"></Icon>
+          <div id="head">
+            <div id="headimg">
+                <div id="headshow" >
+                    <img :src="item.url" > 
+                </div>
             </div>
+            <Upload action="/user/updataHeadImg.go" 
+            name="uploadFile"
+            :show-upload-list="false"
+            :format="format"
+            :on-success="success"       
+            >
+                <Button type="ghost" icon="ios-cloud-upload-outline">上传头像</Button>
+            </Upload>
           </div>
-          <Upload action="/user/updataHeadImg.go" name="uploadFile"
-          multiple="false"
-          show-upload-list="false"
-          :format="format"
-          :on-success="success"       
-          >
-            <Button type="ghost" icon="ios-cloud-upload-outline">上传文件</Button>
-          </Upload>
-       
-        
+            <Form :model="userInfo" :label-width="80">
+                    <Form-item label="昵称">
+                        <Input v-model="userInfo.niclname" placeholder="请输入"></Input>
+                    </Form-item>
+                    <Form-item label="个性签名">
+                        <Input v-model="userInfo.declaration" placeholder="请输入"></Input> 
+                    </Form-item>     
+                    <Form-item>
+                        <Button type="primary" @click="submit">保存</Button>
+                    </Form-item> 
+            </Form> 
         </Card>
-
-        <Modal title="查看图片" v-model="visible">
-        <img :src="'https://o5wwk8baw.qnssl.com/' + imgName + '/large'" v-if="visible" style="width: 100%">
-        </Modal>
     </div>
 </template>
 
@@ -31,24 +37,60 @@
     export default {
        data(){
            return {
+               headimgshow: true,
+               userInfo:{
+                   niclname: '',
+                   declaration: ''
+               },
                item: {
-                   name: 'sda',
-                   url: 'sda'
+                   name: 'default',
+                   url: require('../../assets/logo.png')
                },
                format: ['jpg','png','jpeg'],
                imgName: '',
-               visible: false,
+               visible: false
            }
        },
        methods: {
-           success(re,file){
-
-           },
-
+            handleView (name) {
+                this.imgName = name;
+                this.visible = true;
+            },
+           success(res,file){
+                //console.log(res)
+                this.item.url = res.info
+                this.$store.state.userHead.info = res.info
+                this.$store.state.userInfo.head = res.msg
+            },
+            submit(){
+                this.$store.state.userInfo.niclname = this.userInfo.niclname
+                this.$store.state.userInfo.declaration = this.userInfo.declaration
+                console.log(this.$store.state.userInfo.announces)
+                this.$http.post("/user/setUserInfo.go",this.$store.state.userInfo)
+                .then(res=>{
+                    console.log(res.data)
+                    this.$Message.success(res.data.msg)
+                })
+                .catch(error=>{
+                    
+                })
+            }
+       },
+       mounted(){
+            if(this.$store.state.userInfo.head != ''){
+                this.item.url = this.$store.state.userHead.info
+            }
+            setTimeout(fun=>{
+                if(this.$store.state.userInfo != ''){
+                    this.userInfo.niclname = this.$store.state.userInfo.niclname
+                    this.userInfo.declaration= this.$store.state.userInfo.declaration
+                }
+            },500)
+           
        }
     }
 </script>
-<style>
+<style scoped>
     #card{
         width: 500px;
         height: 600px;
@@ -59,40 +101,23 @@
         width: 200px;
         margin: 0 auto;
     }
-    .demo-upload-list{
-        display: inline-block;
-        width: 60px;
-        height: 60px;
-        text-align: center;
-        line-height: 60px;
-        border: 1px solid transparent;
-        border-radius: 4px;
-        overflow: hidden;
-        background: #fff;
+    #head{
         position: relative;
-        box-shadow: 0 1px 1px rgba(0,0,0,.2);
-        margin-right: 4px;
+        width: 100px;
+        padding: 0px;
+        margin: 0 auto;
+        margin-top: 30px;
+        margin-bottom: 30px;
     }
-    .demo-upload-list img{
-        width: 100%;
-        height: 100%;
+    #headimg{
+        width: 50px;
+        height:50px;
+        position: relative;
+        margin: 0 auto;
+        margin-bottom: 20px;
     }
-    .demo-upload-list-cover{
-        display: none;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(0,0,0,.6);
-    }
-    .demo-upload-list:hover .demo-upload-list-cover{
-        display: block;
-    }
-    .demo-upload-list-cover i{
-        color: #fff;
-        font-size: 20px;
-        cursor: pointer;
-        margin: 0 2px;
+    #headimg img{
+        width: 50px;
+        height:50px;
     }
 </style>

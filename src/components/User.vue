@@ -121,7 +121,7 @@ export default {
             login_loading: false,
             regist_loading: false,
             showdialog: false,
-             ruleInline: {
+            ruleInline: {
                     username: [
                         { required: true, min:0,message: '请填写用户名', trigger: 'blur' },
                         { validator: validateUserName,trigger: "blur"}
@@ -145,7 +145,7 @@ export default {
     methods: {
         login(val){
            this.$refs[val].validate((valid) => {
-                    this.$store.dispatch('loginsuccess')
+                    //this.$store.dispatch('loginsuccess')
                     if (valid) {
                         this.login_loading = true
                         this.$http.post("/user/loginUser.go",this.loginUser)
@@ -153,6 +153,10 @@ export default {
                             if(!response.data.errcode){
                                 this.$Message.success(response.data.msg)
                                 this.login_loading = false
+                                this.$store.state.userHead = response.data
+                                if(!response.data.info){
+                                    this.$store.state.userHead.info = ''
+                                }
                                 this.$emit('dialogclose')
                                 this.$store.dispatch('loginsuccess')
                                 this.showdialog = false

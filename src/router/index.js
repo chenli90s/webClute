@@ -4,13 +4,14 @@ import Hello from '@/components/Hello'
 import UserInfos from '@/components/UserInfos'
 import UserInfo from '@/components/UserInfo/UserInfo'
 import PageInfo from '@/components/UserInfo/PageInfo'
-
+import home from "@/App"
+ 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/hello',
+      path: '/hello', 
       name: 'hello',
       component: Hello
     },
@@ -18,14 +19,17 @@ export default new Router({
       path: '/userInfos',
       name: 'userInfos',
       component: UserInfos,
+      meta: { requiresAuth: true },
       children:[
         {
           path: 'userinfo',
-          component: UserInfo
+          component: UserInfo,
+          meta: { requiresAuth: true }
         },
         {
           path: 'pageinfo',
-          component: PageInfo
+          component: PageInfo,
+          meta: { requiresAuth: true }
         }
       ]
     }
