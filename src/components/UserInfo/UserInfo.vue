@@ -79,9 +79,9 @@
                 this.userInfo.mobile   =  this.$store.state.userInfo.mobile 
                 this.userInfo.birthdy   =  this.$store.state.userInfo.birthdy 
                 this.userInfo.partname =  this.$store.state.userInfo.partname
-                console.log(this.userInfo.gender)
+                //console.log(this.userInfo.gender)
                 }
-            },500)
+            },100)
         }
     }
 </script>

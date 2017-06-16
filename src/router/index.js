@@ -4,7 +4,7 @@ import Hello from '@/components/Hello'
 import UserInfos from '@/components/UserInfos'
 import UserInfo from '@/components/UserInfo/UserInfo'
 import PageInfo from '@/components/UserInfo/PageInfo'
-import home from "@/App"
+import Announce from "@/components/Announce"
  
 Vue.use(Router)
 
@@ -32,6 +32,11 @@ export default new Router({
           meta: { requiresAuth: true }
         }
       ]
+    },
+    {
+      path: '/announce',
+      name: 'announce',
+      component: Announce
     }
   ]
 })

@@ -1,5 +1,5 @@
 <template>
-    <div>   
+    <div id="info">   
         <Menu theme="light" :active-name="itemname" @on-select="select" id="userInfos">       
             <Menu-item name="/userinfos/pageinfo">
                 <Icon type="document-text"></Icon>
@@ -43,6 +43,9 @@
     
 </script>
 <style scoped>
+    #info{
+        margin: 0 auto;
+    }
     #userInfos{
         float: left;
         margin:20px;

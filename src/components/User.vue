@@ -1,15 +1,4 @@
 <template>
-    <div class="user"> 
-           
-    </div>
-</template>
-<script>
-
-export default {
-    
-}
-</script>
-<template>
     <div id="user">
          <Modal v-model="showdialog" @on-cancel="cancel">
             <p slot="header" style="color:green;text-align:center"><span>登陆/注册</span></p>

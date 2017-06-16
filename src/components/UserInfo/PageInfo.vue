@@ -9,14 +9,17 @@
                     <img :src="item.url" > 
                 </div>
             </div>
-            <Upload action="/user/updataHeadImg.go" 
+            <Upload action="/announce/uploaBaseImg.go" 
             name="uploadFile"
+            accept="image/*"
             :show-upload-list="false"
             :format="format"
-            :on-success="success"       
+            :on-success="success"
+            :before-upload="beforeUpload"       
             >
                 <Button type="ghost" icon="ios-cloud-upload-outline">上传头像</Button>
             </Upload>
+            
           </div>
             <Form :model="userInfo" :label-width="80">
                     <Form-item label="昵称">
@@ -34,6 +37,7 @@
 </template>
 
 <script scopedSlots>
+import lrz from 'lrz'
     export default {
        data(){
            return {
@@ -55,6 +59,35 @@
             handleView (name) {
                 this.imgName = name;
                 this.visible = true;
+            },
+            beforeUpload(file){
+                //console.log(file)
+                var conf = {
+                    width: 200,
+                    height: 200,
+                    quality:0.7,
+                    fieldName:'uploadFile'
+                };
+                //this.$http.post("/announce/uploaBaseImg.go",file)
+                var http  = this.$http
+                var methods = this.success
+                lrz(file,conf)
+                .then(function (rst) {
+                    //处理成功会执行
+                    http.post("/user/updataHeadImg.go",rst.formData)
+                    .then(res=>{
+                        methods(res.data,file)
+                    })
+                })
+                .catch(function (err) {
+                    // 处理失败会执行
+                    console.log("处理失败")
+                })
+                .always(function () {
+                    // 不管是成功失败，都会执行
+                });
+                
+                return true;      
             },
            success(res,file){
                 //console.log(res)
@@ -85,7 +118,7 @@
                     this.userInfo.niclname = this.$store.state.userInfo.niclname
                     this.userInfo.declaration= this.$store.state.userInfo.declaration
                 }
-            },500)
+            },100)
            
        }
     }

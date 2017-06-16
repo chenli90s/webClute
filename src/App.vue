@@ -2,7 +2,11 @@
   <div id="app">
     <Menu mode="horizontal" theme="light" active-name="">
             <div class="layout-logo"></div>
+            
             <div class="layout-nav">
+                <menu-item name="announce" style="margin-left:200px">
+                  <router-link to="/announce"><h2>发言</h2></router-link>  
+                </menu-item>
                 <Menu-item v-if="!loginsuccess" name="user" id="user" >
                      <Button type="ghost" @click="login">登陆</Button>            
                 </Menu-item>
@@ -117,7 +121,6 @@ export default {
 <style scoped>
 #app {
   background-color: #DDDEE1; 
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0px;
@@ -125,7 +128,7 @@ export default {
   height: 800px;  
 }
 #wrapper{
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
 }
 #user{
