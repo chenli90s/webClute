@@ -24,7 +24,16 @@ export default {
             editor: 's',
             sayshow: false,
             html: '',
-            txt: ''
+            txt: '',
+            context:{
+                aid: '',
+                status: 'yum',
+                content: '',
+                date: '',
+                hot: '0',
+                attribute: '',
+                userid: ''
+            }
         }
     },
     methods:{
@@ -95,7 +104,21 @@ export default {
             this.sayshow = !this.sayshow
         },
         send(){
-            console.log(this.editor.txt.html())
+            //console.log(this.editor.txt.html())
+            this.context.content = this.editor.txt.html()
+            this.$http.post("/announce/addAnnounce.go",this.context)
+            .then(res=>{
+                if(!res.data.errcode){
+                    this.sayshow = false
+                    this.$Message.success(res.data.msg)
+                    this.clear()
+                }else{
+                    this.$Message.success(res.data.msg)
+                }
+            })
+            .catch(err=>{
+                this.$Message.success('发言失败请检查网络')
+            })
         },
         clear(){
             this.editor.txt.text("")
@@ -103,7 +126,8 @@ export default {
         }
     },
     mounted(){   
-        this.createEditor()           
+        this.createEditor()
+                  
     }
 }
 </script>
