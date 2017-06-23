@@ -1,9 +1,11 @@
 <template>
     <div id="announcelist">
         <Spin id="loading" v-show="!success"  size="large"></Spin>
-        <div id="announces" v-if="success" >
-            <announce v-for="item in contexts" :context="item" :key="item.aid"></announce>
-        </div>
+    
+            <div id="announces" v-if="success" >
+                <announce v-for="item in contexts" :context="item" :key="item.aid"></announce>
+            </div>
+              
     </div>
 </template>
 <script>

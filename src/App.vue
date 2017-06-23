@@ -14,7 +14,7 @@
                    <Dropdown placement="bottom-start"  @on-click="clickItem">  
                         <Badge dot count="1"> 
                           <router-link to="/userInfos/pageInfo">
-                                <img :src="headimgdata" style="height:30px;width:30px;display:line-block"/>    
+                                <img :src="headimgdata" style="height:30px;width:30px;display:line-block; border-radius: 2px;"/>    
                                 <Icon type="arrow-down-b"></Icon>
                           </router-link>    
                         </Badge>     
@@ -125,7 +125,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   margin: 0px;
   padding: 0px;
-  height: 800px;  
 }
 #wrapper{
   width: 90%;

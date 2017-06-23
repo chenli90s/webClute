@@ -50,8 +50,8 @@ export default {
                 // 图片上传之前触发
                 // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，files 是选择的图片文件
                 var conf = {
-                    width: 200,
-                    height: 200,
+                    width: 600,
+                    height: 400,
                     quality:0.7,
                     fieldName:'uploadFile'
                 };

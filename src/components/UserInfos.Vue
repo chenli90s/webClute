@@ -48,12 +48,11 @@
     }
     #userInfos{
         float: left;
-        margin:20px;
-        margin-left:100px;
+        margin-top:12px;
     }
     #info{
         float: left;
-        margin: 10px;
+      
     }
 </style>
 

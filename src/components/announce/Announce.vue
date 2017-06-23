@@ -1,16 +1,35 @@
 <template>
     <div id="announce">
         <card id="card">
+            <div>
+                <img :src="headimg" id="headimg" style='float:left'></img>
+                <p style="margin-left:55px">{{name}}</p>
+                <p style="margin-left:55px;margin-top:5px">11:20</p>
+            </div>
+            
             <div id="content">
                 <div v-html="context.content"></div>
             </div>
-            <div id="footer"></div>
+            <div id="footer">
+            <div id="border"></div>
+                <div id="icons">
+                    <Icon id="icon" type="heart" size="20"></Icon>
+                    <Icon id="icon" type="chatbubble" size="20"></Icon>
+                    <Icon id="icon" type="paper-airplane" size="20"></Icon>
+                </div>        
+            </div>
         </card>
     </div>   
 </template>
 
 <script>
     export default {
+        data(){
+            return{
+                headimg: this.$store.state.userHead.info,
+                name: 'haha'
+            }
+        },
         props: {
             context: {
                 type: Object,
@@ -34,7 +53,27 @@
     #card{
         margin: 10px;
     }
-
+    #border{
+        height:1px;
+        background-color: #4C5A5A
+    }
+    #icons{
+        text-align: right;
+        margin-top:10px;
+    }
+    #icon{
+        margin-right: 10px;
+    }
+    #headimg{
+        width:40px;
+        height:40px;
+        border-radius: 20px;
+    }
+    #content{
+        margin-top: 10px;
+        margin-bottom: 15px;
+        background-color: #fff;
+    }
     table {
       border-top: 1px solid #ccc;
       border-left: 1px solid #ccc;
