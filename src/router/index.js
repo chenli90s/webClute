@@ -36,7 +36,8 @@ export default new Router({
     {
       path: '/announce',
       name: 'announce',
-      component: Announce
+      component: Announce,
+      meta: { requiresAuth: true }
     }
   ]
 })

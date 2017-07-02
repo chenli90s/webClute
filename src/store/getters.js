@@ -1,11 +1,11 @@
 import state from './state'
 export default {
     dialogFromVisible: (state)=>{
-         console.log("-------")
+         //console.log("-------")
         return state.dialogFromVisible
     },
     loginsuccuss: (state)=>{
-        console.log("---login--")
+        //console.log("---login--")
         return state.loginsuccuss
     }
 }

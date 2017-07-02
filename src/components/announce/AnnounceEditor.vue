@@ -105,24 +105,34 @@ export default {
         },
         send(){
             //console.log(this.editor.txt.html())
-            this.context.content = this.editor.txt.html()
-            this.$http.post("/announce/addAnnounce.go",this.context)
-            .then(res=>{
-                if(!res.data.errcode){
-                    this.sayshow = false
-                    this.$Message.success(res.data.msg)
-                    this.clear()
-                }else{
-                    this.$Message.success(res.data.msg)
-                }
-            })
-            .catch(err=>{
-                this.$Message.success('发言失败请检查网络')
-            })
+            //console.log(this.editor.txt.text().toString())
+            if(this.editor.txt.html()!=='<p><br></p>'){
+                this.context.content = this.editor.txt.html()
+                this.$http.post("/announce/addAnnounce.go",this.context)
+                .then(res=>{
+                    if(!res.data.errcode){
+                        this.sayshow = false
+                        this.$Message.success(res.data.msg)
+                        this.clear()
+                        this.addAnnounce()
+                    }else{
+                        this.$Message.success(res.data.msg)
+                    }
+                })
+                .catch(err=>{
+                    this.$Message.error('发言失败请检查网络')
+                })
+            }else{
+                this.$Message.error('内容不能为空')
+            }
+            
         },
         clear(){
             this.editor.txt.text("")
             console.log(this.editor.txt.text())
+        },
+        addAnnounce(){
+            this.$store.dispatch('addAnnounce')
         }
     },
     mounted(){   

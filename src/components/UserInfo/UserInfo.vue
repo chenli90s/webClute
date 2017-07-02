@@ -1,6 +1,6 @@
 <template>
     <div id="userinfo">
-    <Card id="card">
+    <Card class="card">
         <Form :model="userInfo" :rules="ruleInline" :label-width="80">
             <Form-item label="邮箱" prop="eMail">
                 <Input type="text" v-model="userInfo.eMail" placeholder="请输入"></Input>
@@ -86,11 +86,12 @@
     }
 </script>
 
-<style>
-    #card{
+<style scoped>
+    .card{
         width: 500px;
-        height: 600px;
+        height: 50%;
         margin-top: 10px;
-        padding-right: 30px;
+        margin-bottom: 10px;
+        padding-right: 30%;
     }
 </style>

@@ -10,10 +10,11 @@
 </template>
 <script>
 import announce from './announce'
+import {mapState} from 'Vuex'
 export default {
     data(){
         return{
-            contexts: '',
+            context: '',
             success: false,
             page:{
                 requestNum:10,
@@ -22,17 +23,31 @@ export default {
         }
     },
     components:{
-        announce: announce
+        announce: announce,
+    },
+    computed: {
+        ...mapState({
+            newAnnounce: 'newAnnounce'
+        }),
+        contexts(){
+            if(this.newAnnounce !==''){
+                let contexts = this.context.unshift(this.newAnnounce)
+                console.log(this.context)
+                return this.context
+            }
+            console.log(this.context)
+            return this.context
+        }
     },
     mounted(){
         this.$http.post("/announce/getAnnounce.go",this.page)
         .then(res=>{
             //console.log(res.data)
-            this.contexts = res.data
+            this.context = res.data
             this.success = true
         })
+    },
 
-    }
 }    
 </script>
 <style scoped>

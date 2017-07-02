@@ -75,6 +75,7 @@ export default {
                     if(!response.data.errcode){
                         callback(new Error('用户名已存在！'))
                     }
+                    callback()
                 })
                 .catch(error=>{
 
@@ -147,6 +148,7 @@ export default {
                                     this.$store.state.userHead.info = ''
                                 }
                                 this.$emit('dialogclose')
+                                this.$refs['loginUser'].resetFields()
                                 this.$store.dispatch('loginsuccess')
                                 this.showdialog = false
                             }else{
@@ -174,6 +176,7 @@ export default {
                                 this.$Message.success(response.data.msg)
                                 this.regist_loading = false
                                 this.$emit('dialogclose')
+                                this.$refs['registUser'].resetFields()
                                 this.showdialog = false
                             }else{
                                 this.regist_loading = false

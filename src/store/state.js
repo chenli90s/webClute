@@ -3,5 +3,6 @@ export default {
     dialogFromVisible: false,
     loginsuccess: false,
     userHead:'',
-    userInfo: ''
+    userInfo: '',
+    newAnnounce: ''
 }

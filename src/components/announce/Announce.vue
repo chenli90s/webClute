@@ -1,10 +1,10 @@
 <template>
     <div id="announce">
-        <card id="card">
+        <card class="card">
             <div>
-                <img :src="headimg" id="headimg" style='float:left'></img>
-                <p style="margin-left:55px">{{name}}</p>
-                <p style="margin-left:55px;margin-top:5px">11:20</p>
+                <img :src="userInfo.imgPath" id="headimg" style='float:left'></img>
+                <p style="margin-left:55px">{{userInfo.name}}</p>
+                <p style="margin-left:55px;margin-top:5px">{{dateString}}</p>
             </div>
             
             <div id="content">
@@ -26,8 +26,10 @@
     export default {
         data(){
             return{
-                headimg: this.$store.state.userHead.info,
-                name: 'haha'
+                userInfo: {
+                    imgPath: this.$store.state.userHead.info,
+                    name: 'haha'
+                }   
             }
         },
         props: {
@@ -46,11 +48,31 @@
                     }
                 }
             }
+        },
+        computed: {
+            dateString(){
+                let date = new Date(this.context.date)
+                let curdate = new Date()
+                if(date.getFullYear() == curdate.getFullYear()){
+                    if(date.getMonth() == curdate.getMonth() && date.getDate() == curdate.getDate()){
+                        return date.getHours() + ":" + date.getMinutes()
+                    }else{
+                        return date.getMonth()+1 + '-' + date.getDate()
+                    }
+                }else{
+                    return date.getFullYear() + '-' + date.getMonth()
+                }
+            }
+        },
+        mounted(){
+            //console.log(this.context)
+            this.userInfo = JSON.parse(this.context.userid)
+
         }
     }
 </script>
 <style scoped>
-    #card{
+    .card{
         margin: 10px;
     }
     #border{

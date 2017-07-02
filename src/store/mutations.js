@@ -9,5 +9,8 @@ export default {
     },
     [types.LOGINSUCCESS](state) {
         state.loginsuccess = true
+    },
+    addAnnounce(state,res){
+        state.newAnnounce = res.res[0]
     }
 }

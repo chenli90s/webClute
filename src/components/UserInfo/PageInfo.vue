@@ -2,7 +2,7 @@
     <div id="pageinfo">
 
 
-        <Card id="card">
+        <Card class="card">
           <div id="head">
             <div id="headimg">
                 <div id="headshow" >
@@ -124,10 +124,11 @@ import lrz from 'lrz'
     }
 </script>
 <style scoped>
-    #card{
+    .card{
         width: 500px;
-        height: 600px;
+        height: 50%;
         margin-top: 10px;
+        margin-bottom: 10px;
         padding-right: 30px;
     }
     #updateimg{
