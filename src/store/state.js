@@ -4,5 +4,6 @@ export default {
     loginsuccess: false,
     userHead:'',
     userInfo: '',
-    newAnnounce: ''
+    newAnnounce: '',
+    oldAnnounce: '',
 }

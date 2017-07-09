@@ -59,7 +59,7 @@ export default {
                 .then(function (rst) {
                     //处理成功会执行
                     //files[0] = rst.file
-                    console.log(rst);
+                    //console.log(rst);
                     //flag = false
                     xhr.send(rst.formData)
                 })
@@ -129,7 +129,7 @@ export default {
         },
         clear(){
             this.editor.txt.text("")
-            console.log(this.editor.txt.text())
+            //console.log(this.editor.txt.text())
         },
         addAnnounce(){
             this.$store.dispatch('addAnnounce')

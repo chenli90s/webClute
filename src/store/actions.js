@@ -19,5 +19,17 @@ export default {
                 res: res.data
             })
         })
+    },
+    delAnnounce: ({commit},payload) =>{
+        //console.log(payload.aid)
+        axios.get('/announce/delectAnnounce.go',
+                {params:{aid:payload.aid}})
+                .then(res => {
+                    res.data.data = payload.aid
+                    commit({
+                        type: 'delAnnounce',
+                        res: res.data
+                    })
+                })
     }
 }

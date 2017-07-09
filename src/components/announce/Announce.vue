@@ -3,8 +3,9 @@
         <card class="card">
             <div>
                 <img :src="userInfo.imgPath" id="headimg" style='float:left'></img>
-                <p style="margin-left:55px">{{userInfo.name}}</p>
-                <p style="margin-left:55px;margin-top:5px">{{dateString}}</p>
+                <p style="margin-left:15px;display:inline-block">{{userInfo.name}}</p>
+                <div class="del" style="cursor: pointer;"><Icon type="trash-b" size="20" @click.native="delAnnounce"></Icon></div>
+                <br><p style="margin-left:15px;margin-top:5px;display:inline-block">{{dateString}}</p> 
             </div>
             
             <div id="content">
@@ -49,6 +50,15 @@
                 }
             }
         },
+        methods: {
+            delAnnounce(){
+                //console.log(this.context.aid)
+                this.$store.dispatch({
+                    type: 'delAnnounce',
+                    aid: this.context.aid
+                })
+            }
+        },
         computed: {
             dateString(){
                 let date = new Date(this.context.date)
@@ -74,6 +84,9 @@
 <style scoped>
     .card{
         margin: 10px;
+    }
+    .del{
+        float:right;
     }
     #border{
         height:1px;

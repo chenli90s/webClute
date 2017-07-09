@@ -12,5 +12,8 @@ export default {
     },
     addAnnounce(state,res){
         state.newAnnounce = res.res[0]
+    },
+    delAnnounce(state,res){
+        state.oldAnnounce = res.res.data
     }
 }
